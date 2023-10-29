@@ -4,15 +4,13 @@
 class Vector{
     public:
         std::vector<int> v;
-        Vector(std::vector<int> v) {
-            v = v;
-            std::cout<<v[0];
+        Vector(std::vector<int> vec) {
+            v = vec;
         }
 
-        friend Vector operator+(Vector lhs, const Vector& rhs) {
+        friend Vector operator+(Vector& lhs, const Vector& rhs) {
             int vector_lenght = lhs.v.size();
-            std::vector<int> result;
-            for (int i=0; i<vector_lenght; i++) result.push_back(0);
+            std::vector<int> result(vector_lenght,0);
             for (int i=0; i<vector_lenght; i++) result[i] = lhs.v[i] + rhs.v[i];
             return Vector(result);
         }
@@ -20,17 +18,16 @@ class Vector{
 
 std::ostream& operator<<(std::ostream& out, const Vector& rhs) {
     for (const auto& element: rhs.v) {
-        std::cout<<element;
-        out << element << " ";
+        out<<element;
+        if (element != rhs.v.back()) out<<",";
     }
     return out;
 }
 
 int main() {
-    Vector v1{{1,2,3}};
-    std::cout<<v1<<std::endl;
-    Vector v2{{3,2,1}};
-    std::cout<<v2<<std::endl;
-    Vector sum = v1+v2;
-    std::cout<<sum;
+    Vector v1(std::vector<int> {1,2,3});
+    std::cout<<"Vector 1: "<<v1<<std::endl;
+    Vector v2(std::vector<int> {1,2,3});
+    std::cout<<"Vector 2: "<<v2<<std::endl;
+    std::cout<<"Sum: "<<v1+v2;
 }

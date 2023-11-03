@@ -30,9 +30,8 @@ class Person {
 class Mickael : public Person {
     public:
         std::string name;
-        Mickael(std::string n, double h, double w, std::string g, int a) {
+        Mickael(std::string n, double h, double w, std::string g, int a) : Person(h,w,g,a) {
             name = n;
-            
         }
 
         void print_name_age() {
@@ -41,5 +40,7 @@ class Mickael : public Person {
 };
 
 int main() {
-    Mickael obj() 
+    Mickael obj("Mickael", 1.7, 70., "Male", 24);
+    std::cout<<obj.get_imc()<<"\n";
+    obj.print_name_age();
 }
